@@ -100,7 +100,6 @@ def quick_sort(to_sort):
             cmp += 1
             equal.append(to_sort[i])
         else:
-            cmp += 1
             right.append(to_sort[i])
     rl = quick_sort(left)
     rr = quick_sort(right)
