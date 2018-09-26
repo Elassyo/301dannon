@@ -37,12 +37,14 @@ def insertion_sort(to_sort):
     cmp = 0
     for i in range(1, length):
         j = i
-        if j > 0 and not to_sort[j - 1] > to_sort[j]:
+        while j > 0:
             cmp += 1
-        while j > 0 and to_sort[j - 1] > to_sort[j]:
-            cmp += 1
-            to_sort[j], to_sort[j - 1] = to_sort[j - 1], to_sort[j]
-            j -= 1
+            if to_sort[j - 1] < to_sort[j]:
+                to_sort[j], to_sort[j - 1] = to_sort[j - 1], to_sort[j]
+                j -= 1
+            else:
+                break
+    #print(to_sort)
     return cmp
 
 
@@ -89,16 +91,20 @@ def quick_sort(to_sort):
     if length <= 1:
         return to_sort, cmp
     pivot = to_sort[0]
-    left, right = [], []
+    left, right, equal = [], [], [pivot]
     for i in range(1, length):
         cmp += 1
-        if to_sort[i] < pivot:
+        if to_sort[i] > pivot:
             left.append(to_sort[i])
+        elif to_sort[i] == pivot:
+            cmp += 1
+            equal.append(to_sort[i])
         else:
+            cmp += 1
             right.append(to_sort[i])
     rl = quick_sort(left)
     rr = quick_sort(right)
-    to_sort += rl[0] + rr[0]
+    to_sort = rl[0] + equal + rr[0]
     cmp += rl[1] + rr[1]
     return to_sort, cmp
 
@@ -111,11 +117,10 @@ def main(args):
         to_sort = [float(elem) for elem in f.read().split(" ")]
     print("{} elements".format(len(to_sort)))
     print("select sort: {} comparisons".format(select_sort(to_sort[::])))
-    print("bubble sort: {} comparisons".format(bubble_sort(to_sort[::])))
     print("insertion sort: {} comparisons".format(insertion_sort(to_sort[::])))
-    print("merge sort: {} comparisons".format(merge_sort(to_sort[::])[1]))
-    print("quick sort: {} comparisons".format(quick_sort(to_sort[::])))
-
+    print("bubble sort: {} comparisons".format(bubble_sort(to_sort[::])))
+    print("fusion sort: {} comparisons".format(merge_sort(to_sort[::])[1]))
+    print("quick sort: {} comparisons".format(quick_sort(to_sort[::])[1]))
 
 
 if __name__ == "__main__":
