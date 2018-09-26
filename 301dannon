@@ -39,7 +39,7 @@ def insertion_sort(to_sort):
         j = i
         while j > 0:
             cmp += 1
-            if to_sort[j - 1] < to_sort[j]:
+            if to_sort[j - 1] <= to_sort[j]:
                 to_sort[j], to_sort[j - 1] = to_sort[j - 1], to_sort[j]
                 j -= 1
             else:
@@ -94,11 +94,8 @@ def quick_sort(to_sort):
     left, right, equal = [], [], [pivot]
     for i in range(1, length):
         cmp += 1
-        if to_sort[i] > pivot:
+        if to_sort[i] >= pivot:
             left.append(to_sort[i])
-        elif to_sort[i] == pivot:
-            cmp += 1
-            equal.append(to_sort[i])
         else:
             right.append(to_sort[i])
     rl = quick_sort(left)
@@ -123,4 +120,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    try:
+        main(sys.argv[1:])
+    except:
+        sys.exit(84)
