@@ -4,14 +4,14 @@ import sys
 
 
 def bubble_sort(to_sort):
-    sorted = False
+    issorted = False
     length = len(to_sort)
     cmp = 0
-    while not sorted:
-        sorted = True
+    while not issorted:
+        issorted = True
         for i in range(0, length - 1):
             if to_sort[i] < to_sort[i+1]:
-                sorted = False
+                issorted = False
                 to_sort[i], to_sort[i + 1] = to_sort[i + 1], to_sort[i]
             cmp += 1
         length -= 1
@@ -108,6 +108,9 @@ def quick_sort(to_sort):
 def main(args):
     if len(args) != 1:
         sys.exit(84)
+    if args[0] == "-h":
+        print("USAGE\n\t\t./301dannon file\n\nDESCRIPTION\n\t\tfile\tfile that contains the numbers to be sorted, seperated by spaces")
+        return
     to_sort = []
     f = open(args[0])
     to_sort = [float(elem) for elem in f.read().split(" ")]
