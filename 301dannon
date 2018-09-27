@@ -109,8 +109,8 @@ def main(args):
     if len(args) != 1:
         sys.exit(84)
     to_sort = []
-    with open(args[0]) as f:
-        to_sort = [float(elem) for elem in f.read().split(" ")]
+    f = open(args[0])
+    to_sort = [float(elem) for elem in f.read().split(" ")]
     print("{} elements".format(len(to_sort)))
     print("select sort: {} comparisons".format(select_sort(to_sort[::])))
     print("insertion sort: {} comparisons".format(insertion_sort(to_sort[::])))
