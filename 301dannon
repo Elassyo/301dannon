@@ -7,14 +7,12 @@ def bubble_sort(to_sort):
     issorted = False
     length = len(to_sort)
     cmp = 0
-    while not issorted:
-        issorted = True
-        for i in range(0, length - 1):
-            if to_sort[i] < to_sort[i+1]:
+    for i in range(0, length - 1):
+        for j in range(0, length - i - 1):
+            if to_sort[i] > to_sort[i+1]:
                 issorted = False
                 to_sort[i], to_sort[i + 1] = to_sort[i + 1], to_sort[i]
             cmp += 1
-        length -= 1
     return cmp
 
 
