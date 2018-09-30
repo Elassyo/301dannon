@@ -110,7 +110,7 @@ def main(args):
         return
     to_sort = []
     f = open(args[0], "r")
-    text = f.read().strip().replace("\t", " ")
+    text = f.read().strip().replace("\t", " ").replace('\n', " ")
     text = ' '.join(text.split(" "))
     spl = text.split(" ")
     is_nbr = True
