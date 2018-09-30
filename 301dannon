@@ -113,23 +113,34 @@ def main(args):
     text = f.read().strip().replace("\t", " ")
     text = ' '.join(text.split(" "))
     spl = text.split(" ")
-    for elem in text.split(" "):
+    is_nbr = True
+    try:
+        a = list(map(float, spl))
+    except ValueError:
+        is_nbr = False
+    for elem in spl:
         if len(elem) > 0:
-                to_sort.append(float(elem))
+                to_sort.append(float(elem) if is_nbr else elem)
     f.close()
     if len(to_sort) <= 1:
         print("{} element".format(len(to_sort)))
     else:
         print("{} elements".format(len(to_sort)))
-    print("select sort: {} comparisons".format(select_sort(to_sort[::])))
-    print("insertion sort: {} comparisons".format(insertion_sort(to_sort[::])))
-    print("bubble sort: {} comparisons".format(bubble_sort(to_sort[::])))
-    print("fusion sort: {} comparisons".format(merge_sort(to_sort[::])[1]))
-    print("quicksort: {} comparisons".format(quick_sort(to_sort[::])[1]))
+    c = select_sort(to_sort[::])
+    print("select sort: {} comparison".format(c) + ("s" if c > 1 else ""))
+    c = insertion_sort(to_sort[::])
+    print("insertion sort: {} comparison".format(c) + ("s" if c > 1 else ""))
+    c= bubble_sort(to_sort[::])
+    print("bubble sort: {} comparison".format(c) + ("s" if c > 1 else ""))
+    c= merge_sort(to_sort[::])[1]
+    print("fusion sort: {} comparison".format(c) + ("s" if c > 1 else ""))
+    c= quick_sort(to_sort[::])[1]
+    print("quicksort: {} comparison".format(c) + ("s" if c > 1 else ""))
 
 
 if __name__ == "__main__":
+    main(sys.argv[1:])
     try:
-        main(sys.argv[1:])
+        pass
     except:
         sys.exit(84)
